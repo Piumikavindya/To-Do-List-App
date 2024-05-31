@@ -64,7 +64,7 @@ const HomePage = () => {
 
   return (
     <div className="container">
-      <h1>To-Do List</h1>
+      <p>To-Do List</p>
       <div className="task-input">
         <input
           type="text"
@@ -89,14 +89,15 @@ const HomePage = () => {
                 {task.taskName}
               </span>
             )}
-            <div className="task-actions task-actions-edit">
-              {editTask && editTask._id === task._id ? (
-                <button onClick={() => updateTask(task._id, editTask)}>Save</button>
-              ) : (
-                <button onClick={() => setEditTask(task)}>Edit</button>
-              )}
-              <button onClick={() => deleteTask(task._id)}>Delete  </button>
-            </div>
+        <div className="task-actions">
+  {editTask && editTask._id === task._id ? (
+    <button className="edit-button" onClick={() => updateTask(task._id, editTask)}>Save</button>
+  ) : (
+    <button className="edit-button" onClick={() => setEditTask(task)}>Edit</button>
+  )}
+  <button className="delete-button" onClick={() => deleteTask(task._id)}>Delete</button>
+</div>
+
           </li>
         ))}
       </ul>

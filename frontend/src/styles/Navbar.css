@@ -3,7 +3,7 @@
   background-color: #32012F;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
   padding: 10px;
-  height: 50px;
+  height: 60px;
 }
 
 .navbar-container {
@@ -27,12 +27,12 @@
   .navbar-item {
     margin-left: 20px;
     align-items: center;
-    margin-right: 10px; /* Add some space between items */
+    margin-right: 10px;
   }
   
 
 .navbar-link {
-  color: #f87171; /* Tailwind CSS red-400 color */
+  color: #E6A4B4; 
   font-weight: 600;
   align-items: center;
   font-size: 1.125rem;
@@ -41,7 +41,7 @@
 }
 
 .navbar-link:hover {
-  color: #f87171; /* Tailwind CSS red-400 color */
+  color: #E6A4B4; 
 }
 
 .navbar-search {
