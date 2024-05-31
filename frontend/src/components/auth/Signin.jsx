@@ -21,13 +21,13 @@ export default function SignIn({ setIsAuthenticated }) {
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await axios.post('http://localhost:8002/user/signIn', {
-        Email: credentials.email,
-        Password: credentials.password,
+        email: credentials.email,  // Change Email to email
+        password: credentials.password,  // Change Password to password
       });
-
+  
       if (response.data.user) {
         setIsAuthenticated(true);
         navigate('/');
@@ -42,7 +42,7 @@ export default function SignIn({ setIsAuthenticated }) {
       }
     }
   };
-
+  
   return (
     <div className="signin-container">
       <form onSubmit={handleSignIn} className="signin-form">

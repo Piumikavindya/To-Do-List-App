@@ -6,17 +6,9 @@ const Navbar = ({ isAuthenticated, handleSignOut }) => {
   return (
     <div className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo">
-          <img src="/logo.png" alt="Logo" className="navbar-logo-img" />
-        </Link>
+        
         <ul className="navbar-menu">
-          <li className="navbar-item">
-            <input
-              type="text"
-              className="navbar-search"
-              placeholder="Search..."
-            />
-          </li>
+        
           <li className="navbar-item">
             <Link to="/" className="navbar-link">
               Home

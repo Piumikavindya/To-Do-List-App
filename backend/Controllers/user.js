@@ -32,32 +32,34 @@ exports.viewUsers = async (req, res) => {
   }
 };
 
+
 exports.signIn = async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    console.log('Incoming data:', req.body);
-
-    const user = await User.findOne({ email });
-    console.log('User found:', user);
-
-    if (!user) {
-      console.log('User not found with the provided email');
-      return res.status(401).json({ success: false, message: 'Invalid email or password' });
+    const { email, password } = req.body;  // Ensure this matches the incoming request body
+  
+    try {
+      console.log('Incoming data:', req.body);
+  
+      const user = await User.findOne({ email });
+      console.log('User found:', user);
+  
+      if (!user) {
+        console.log('User not found with the provided email');
+        return res.status(401).json({ success: false, message: 'Invalid email or password' });
+      }
+  
+      const isPasswordMatch = user.comparePassword(password);
+      console.log('Password match:', isPasswordMatch);
+  
+      if (!isPasswordMatch) {
+        console.log('Password does not match');
+        return res.status(401).json({ success: false, message: 'Invalid email or password' });
+      }
+  
+      const { _id, name } = user;
+      res.json({ success: true, user: { id: _id, name } });
+    } catch (error) {
+      console.error('Error in signIn:', error);
+      res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
-
-    const isPasswordMatch = user.comparePassword(password);
-    console.log('Password match:', isPasswordMatch);
-
-    if (!isPasswordMatch) {
-      console.log('Password does not match');
-      return res.status(401).json({ success: false, message: 'Invalid email or password' });
-    }
-
-    const { _id, name } = user;
-    res.json({ success: true, user: { id: _id, name } });
-  } catch (error) {
-    console.error('Error in signIn:', error);
-    res.status(500).json({ success: false, message: 'Internal Server Error' });
-  }
-};
+  };
+  

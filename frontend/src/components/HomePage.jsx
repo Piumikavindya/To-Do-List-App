@@ -89,7 +89,7 @@ const HomePage = () => {
                 {task.taskName}
               </span>
             )}
-            <div className="task-actions">
+            <div className="task-actions task-actions-edit">
               {editTask && editTask._id === task._id ? (
                 <button onClick={() => updateTask(task._id, editTask)}>Save</button>
               ) : (

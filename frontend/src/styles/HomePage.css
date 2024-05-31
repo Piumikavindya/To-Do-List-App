@@ -1,10 +1,31 @@
+body {
+    margin: auto;
+    padding: 0;
+    background-image: url('../assets/background.jpg'); 
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: Arial, sans-serif; /* Example font-family */
+  }
+
+  h1{
+    color: #C7B9EC;
+  
+  }
+
 .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
+    max-width: 500px;
+    margin: 50px 0px 40px 680px;
+    padding: 80px;
     text-align: center;
+    background-color: rgba(50,1,47, 0.9);
+    backface-visibility: transparent;
+    background-size: cover;
+    border-radius: 20px; 
   }
   
+  /* The rest of your styles remain unchanged */
   .task-input {
     display: flex;
     justify-content: space-between;
@@ -16,15 +37,17 @@
     padding: 10px;
     margin-right: 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 8px;
   }
   
   .task-input button {
     padding: 10px 20px;
     border: none;
-    background-color: #28a745;
-    color: white;
-    border-radius: 4px;
+    background-color: #A8DF8E;
+    color: #401341;
+    font-size: 16px;
+    font-weight: semibold;
+    border-radius: 8px;
     cursor: pointer;
   }
   
@@ -37,9 +60,10 @@
     display: flex;
     justify-content: space-between;
     padding: 10px;
+    color: #C7B9EC;
     margin-bottom: 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 8px;
   }
   
   .task-item.completed span {
@@ -49,13 +73,19 @@
   .task-actions button {
     margin-left: 10px;
     border: none;
-    background-color: #dc3545;
-    color: white;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
   }
   
-
+  .edit-button {
+    background-color: #535C91; /* Blue color */
+    color: white;
+  }
+  
+  .delete-button {
+    background-color: #dc3545; /* Red color */
+    color: white;
+  }
   .task-completed {
     color: gray;
     text-decoration: line-through;
