@@ -19,5 +19,16 @@ This is simple To-do list app where user can signup, signin and add task to to d
 - **Architecture**: MVC
 
 ## Pages
-# Home Page
-![image](https://github.com/Piumikavindya/To-Do-List-App/assets/118907095/ffa1f5d2-6008-4063-9bef-1e07013d6d90)
+### Home Page
+
+![image](https://github.com/Piumikavindya/To-Do-List-App/assets/118907095/7b38430d-a8d0-4d5e-82e7-641139abb8df)
+
+### SignIn Page
+
+![image](https://github.com/Piumikavindya/To-Do-List-App/assets/118907095/e6ceece3-336a-4552-b35b-8b0b722795ed)
+
+### SignUp Page
+
+![image](https://github.com/Piumikavindya/To-Do-List-App/assets/118907095/c84ea151-3170-4040-8bb0-e317d7f39d61)
+
+
