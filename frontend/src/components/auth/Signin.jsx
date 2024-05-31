@@ -1,19 +1,13 @@
 import React, { useState } from 'react';
-import Container from '../Container';
-import Title from '../form/Title';
-import FormInput from '../form/FormInput';
-import CustomLink from '../CustomLink';
-import { commonModalClasses } from '../util/themes';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import '../../styles/Signin.css';
 
-export default function Signin({ setIsAuthenticated }) {
+export default function SignIn({ setIsAuthenticated }) {
   const [credentials, setCredentials] = useState({
-    Email: '',
-    Password: '',
-
+    email: '',
+    password: '',
   });
-  const [loggedInUser, setLoggedInUser] = useState(null);
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -26,76 +20,63 @@ export default function Signin({ setIsAuthenticated }) {
   };
 
   const handleSignIn = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
 
     try {
-      console.log('Submitting credentials:', credentials); // Log credentials
-
       const response = await axios.post('http://localhost:8002/user/signIn', {
-        Email: credentials.Email,
-        Password: credentials.Password,
-        role: credentials.role,
+        Email: credentials.email,
+        Password: credentials.password,
       });
 
-      console.log("Response data:", response.data); // Log entire response
-      console.log("User details:", response.data.user);
-
       if (response.data.user) {
-        // Authentication successful
-        console.log("User Login is Successful:", response.data.user);
-        // Update your state or localStorage with user details
-        setLoggedInUser(response.data.user);
-
-        // Update authentication state
         setIsAuthenticated(true);
-
-      
+        navigate('/');
       } else {
-        console.log("Invalid email or password");
+        setError('Invalid email or password');
       }
     } catch (err) {
       if (err.response && err.response.status === 401) {
         setError('Invalid email or password');
       } else {
-        console.log('Signin failed:', err);
-        setError('Signin failed, please try again later');
+        setError('Sign in failed, please try again later');
       }
     }
   };
 
   return (
-    <div className="fixed inset-0 dark:bg-primary bg-green-200 transparent-background -z-10 flex justify-center items-center p-1">
-      <Container className="relative p-4 transparent-bgForm">
-        <form onSubmit={handleSignIn} className={commonModalClasses + ' w-72 '}>
-          <Title Children="Sign in"> Sign in</Title>
-          <FormInput
-            label="Email"
+    <div className="signin-container">
+      <form onSubmit={handleSignIn} className="signin-form">
+        <h2 className="signin-title">Sign In</h2>
+        <div className="signin-input-group">
+          <label htmlFor="email" className="signin-label">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value={credentials.email}
+            onChange={handleChange}
             placeholder="abcd@gmail.com"
-            name="Email"
-            value={credentials.Email}
-            onChange={handleChange}
+            className="signin-input"
           />
-          <FormInput
-            label="Password"
-            placeholder="***********"
-            name="Password"
+        </div>
+        <div className="signin-input-group">
+          <label htmlFor="password" className="signin-label">Password</label>
+          <input
             type="password"
-            value={credentials.Password}
+            name="password"
+            id="password"
+            value={credentials.password}
             onChange={handleChange}
+            placeholder="***********"
+            className="signin-input"
           />
-         
-          <button type="submit" className="btn btn-primary p-2">
-            Sign in
-          </button>
-
-          {error && <p className="text-red-500">{error}</p>}
-
-          <div className="flex justify-between">
-            
-            <CustomLink to="/auth/signup">Sign up</CustomLink>
-          </div>
-        </form>
-      </Container>
+        </div>
+        <button type="submit" className="signin-button">Sign In</button>
+        {error && <p className="signin-error">{error}</p>}
+        <div className="signin-links">
+          <Link to="/auth/signup" className="signin-link">Sign Up</Link>
+        </div>
+      </form>
     </div>
   );
 }

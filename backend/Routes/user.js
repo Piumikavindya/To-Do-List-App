@@ -11,6 +11,6 @@ router.post("/create",create, (req, res) => {
 });
 router.get('/view-users', viewUsers);
 
-router.post('/signIn', signInValidator, validate, signIn);
+router.post('/signIn',signIn);
 
 module.exports = router;

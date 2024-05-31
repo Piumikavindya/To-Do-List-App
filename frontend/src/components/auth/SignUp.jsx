@@ -1,68 +1,108 @@
 import React, { useState } from 'react';
-import Container from '../Container';
-import Title from '../form/Title';
-import FormInput from '../form/FormInput';
-import CustomLink from '../CustomLink';
-import { commonModalClasses } from '../util/themes';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import '../../styles/SignUp.css';
 
 export default function Signup() {
-  const [Name, setName] = useState("");
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
-  const [UserName, setUserName] = useState("");
-  const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleChange = (setter) => ({ target }) => {
-    setter(target.value);
+  const handleChange = (setter) => (e) => {
+    setter(e.target.value);
   };
 
-  const sendData = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newUser = {
-      Name,
-      Email,
-      Password,
-      Username: UserName, 
+      name,
+      email,
+      password,
+      username,
     };
 
     setLoading(true);
-    axios
-      .post('http://localhost:8002/user/create', newUser)
-      .then(() => {
-        alert("User Added");
-        console.log('User registered successfully');
-        navigate('/auth/signin');
-      })
-      .catch((err) => {
-        console.log('Registration failed:', err);
-      })
-      .finally(() => {
-        setLoading(false);
+    try {
+      await axios.post('http://localhost:8002/user/create', newUser, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
+      alert("User Added");
+      navigate('/auth/signin');
+    } catch (err) {
+      setError('Registration failed, please try again later');
+      console.log('Registration failed:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="fixed inset-0 dark:bg-primary bg-green-200 -z-10 flex justify-center items-center p-1">
-      <Container>
-        <form onSubmit={sendData} className={commonModalClasses + ' w-72 '}>
-          <Title children='Sign up' />
-          <FormInput value={Name} onChange={handleChange(setName)} label='Name' placeholder='Piumi Kavindya' name='Name' />
-          <FormInput value={Email} onChange={handleChange(setEmail)} label='Email' placeholder='abcd@gmail.com' name='Email' />
-          <FormInput value={UserName} onChange={handleChange(setUserName)} label='UserName' placeholder='User name' name='UserName' />
-          <FormInput value={Password} onChange={handleChange(setPassword)} label='Password' placeholder='***********' name='Password' type='password' />
-          <button type="submit" className="btn btn-primary bg-black p-2" disabled={loading}>
-            Sign up
-          </button>
-          <div className='flex justify-between'>
-           
-            <CustomLink to='/auth/signin'>Sign in</CustomLink>
-          </div>
-        </form>
-      </Container>
+    <div className="signup-container">
+      <form onSubmit={handleSubmit} className="signup-form">
+        <h2 className="signup-title">Sign Up</h2>
+        <div className="signup-input-group">
+          <label htmlFor="name" className="signup-label">Name</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            value={name}
+            onChange={handleChange(setName)}
+            placeholder="Input name"
+            className="signup-input"
+          />
+        </div>
+        <div className="signup-input-group">
+          <label htmlFor="email" className="signup-label">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value={email}
+            onChange={handleChange(setEmail)}
+            placeholder="abcd@gmail.com"
+            className="signup-input"
+          />
+        </div>
+        <div className="signup-input-group">
+          <label htmlFor="username" className="signup-label">Username</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            value={username}
+            onChange={handleChange(setUsername)}
+            placeholder="User name"
+            className="signup-input"
+          />
+        </div>
+        <div className="signup-input-group">
+          <label htmlFor="password" className="signup-label">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value={password}
+            onChange={handleChange(setPassword)}
+            placeholder="***********"
+            className="signup-input"
+          />
+        </div>
+        <button type="submit" className="signup-button" disabled={loading}>
+          Sign Up
+        </button>
+        {error && <p className="signup-error">{error}</p>}
+        <div className="signup-links">
+          <Link to="/auth/signin" className="signup-link">Sign In</Link>
+        </div>
+      </form>
     </div>
   );
 }

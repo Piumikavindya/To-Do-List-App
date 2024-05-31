@@ -9,7 +9,7 @@ require('dotenv').config();
 require('express-async-errors');
 require('./database/database');
 const taskRoutes = require('./Routes/task');
-
+const userRoutes = require('./Routes/user');
 
 
 const PORT = process.env.PORT || 8002;
@@ -25,7 +25,7 @@ app.use(cors());
 
 
 
-app.use('/user', taskRoutes);
+app.use('/user', userRoutes);
 app.use('/task', taskRoutes);
 
 
