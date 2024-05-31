@@ -17,3 +17,7 @@ This is simple To-do list app where user can signup, signin and add task to to d
 - **Frontend**: React.js, Tailwind CSS
 - **Backend**: Node.js, Express.js, MongoDB
 - **Architecture**: MVC
+
+## Pages
+# Home Page
+![image](https://github.com/Piumikavindya/To-Do-List-App/assets/118907095/ffa1f5d2-6008-4063-9bef-1e07013d6d90)
