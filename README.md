@@ -1,11 +1,10 @@
 # To-Do-List-App
 
-The Web Procurement Management System (PMS) provides an extensive feature set with the goal of improving and optimizing the procurement procedure at the University of Ruhuna's Faculty of 
-Engineering. Basically, the PMS lets users effectively create, monitor, and handle procurement requests. Real-time progress tracking, automated workflows for approval, and an established supplier database for convenient access are some of the key features.
+This is simple To-do list app where user can signup, signin and add task to to do list. also user can edit, delete the task and mark as completed.
 
 ## Installation
 
-- Clone the repository to your local machine: **git clone https://github.com/Piumikavindya/Procument-Managemant-System.git**
+- Clone the repository to your local machine: **git clone https://github.com/Piumikavindya/To-Do-List-App.git**
 - Open the project folder using Vs code
 - Open the terminal and go to frontend folder using **cd frontend** command
 - Run **npm init** to install node modules
