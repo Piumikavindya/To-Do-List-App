@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import '../../styles/Signin.css';
+import { baseURL } from '../../utils';
 
 export default function SignIn({ setIsAuthenticated }) {
   const [credentials, setCredentials] = useState({
@@ -23,7 +24,7 @@ export default function SignIn({ setIsAuthenticated }) {
     e.preventDefault();
   
     try {
-      const response = await axios.post('http://localhost:8002/user/signIn', {
+      const response = await axios.post(`${baseURL}/user/signIn`, {
         email: credentials.email,  // Change Email to email
         password: credentials.password,  // Change Password to password
       });

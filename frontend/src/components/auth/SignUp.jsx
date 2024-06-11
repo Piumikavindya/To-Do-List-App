@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import '../../styles/SignUp.css';
+import { baseURL } from '../../utils';
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -28,7 +29,7 @@ export default function Signup() {
 
     setLoading(true);
     try {
-      await axios.post('http://localhost:8002/user/create', newUser, {
+      await axios.post(`${baseURL}/user/create`, newUser, {
         headers: {
           'Content-Type': 'application/json'
         }
